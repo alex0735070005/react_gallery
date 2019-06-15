@@ -1,13 +1,35 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import List from './views/List';
+import { connect } from 'react-redux';
+import { getPhotos } from './service';
 import './style.scss';
 
-function App() {
+function Gallery(props) {
+
+  const { setPhotos, photos } = props;
+  
+  useEffect(() => {
+
+    getPhotos()
+      .then(photos => {
+        setPhotos(photos);
+      })
+
+  }, []);
 
   return (
-    <div className="App">
-      <h1>Hello GALLERY</h1>
+    <div className="gallery">
+      <List photos={photos} />
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = state => ({
+  photos: state.gallery.photos
+})
+
+const mapDispatchToProps = dispatch => ({
+  setPhotos: photos => dispatch({type: 'SET_PHOTOS', photos})
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Gallery);
