@@ -2,11 +2,10 @@ import React from 'react';
 import './style.scss';
 
 function Footer() {
-
   return (
-    <div className="footer">
-      <h1>Hello footer</h1>
-    </div>
+    <footer>
+        <a href="#">Web developer Axenov Alex</a>
+    </footer>
   );
 }
 

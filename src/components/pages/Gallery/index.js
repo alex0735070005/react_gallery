@@ -6,7 +6,7 @@ import './style.scss';
 
 function Gallery(props) {
 
-  const { setPhotos, photos } = props;
+  const { setPhotos, photos, setFavorite } = props;
   
   useEffect(() => {
 
@@ -19,7 +19,7 @@ function Gallery(props) {
 
   return (
     <div className="gallery">
-      <List photos={photos} />
+      <List photos={photos} setFavorite={setFavorite} />
     </div>
   );
 }
@@ -29,7 +29,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  setPhotos: photos => dispatch({type: 'SET_PHOTOS', photos})
+  setPhotos: photos => dispatch({type: 'SET_PHOTOS', photos}),
+  setFavorite: photo => dispatch({type: 'SET_FAVORITE', photo})
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Gallery);
